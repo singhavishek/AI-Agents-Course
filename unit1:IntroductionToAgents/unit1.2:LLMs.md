@@ -150,3 +150,60 @@ Try out beam search decoding in the following interactive visualizer:
 
 <iframe src="https://agents-course-beam-search-visualizer.hf.space" width="100%" height="500" style="border:1px solid #ccc; border-radius:8px;" title="Beam Search Visualizer"></iframe>
 
+### 6. Attention is all you need
+
+A key aspect of the Transformer architecture is **Attention**. When predicting the next word, not every word in a sentence is equally important; words like “France” and “capital” in the sentence “The capital of France is …” carry the most meaning.
+
+The **Attention mechanism** enables the model to weigh the relevance of each token in the input sequence when making predictions. Instead of processing words in strict order, the model dynamically focuses on the most relevant parts of the input for each prediction step.
+
+#### 6.1 How Attention Works
+
+At each layer, the model computes a set of **attention scores** that determine how much each token should contribute to the representation of every other token. This is achieved through three key components:
+
+- **Query (Q):** Represents the current token being processed.
+- **Key (K):** Represents all tokens in the sequence.
+- **Value (V):** Contains the information to be aggregated.
+
+The attention score between a query and a key determines how much of the corresponding value should be included in the output.
+
+Mathematically, the attention mechanism is often described as:
+
+```
+Attention(Q, K, V) = softmax(QKᵀ / √dₖ) V
+```
+
+Where `dₖ` is the dimension of the key vectors.
+
+#### 6.2 Multi-Head Attention
+
+Transformers use **multi-head attention**, which means the model learns multiple sets of attention weights in parallel. Each "head" can focus on different aspects of the input, allowing the model to capture a richer set of relationships.
+
+![Attention Mechanism](Images/AttentionSceneFinal.gif)
+
+> **Summary:** Attention allows LLMs to dynamically focus on the most relevant parts of the input, enabling them to understand context and relationships between words more effectively than previous architectures.
+
+> Although the basic principle of LLMs—predicting the next token—has remained consistent since GPT-2, there have been significant advancements in scaling neural networks and making the attention mechanism work for longer and longer sequences.
+
+If you’ve interacted with LLMs, you’re probably familiar with the term context length, which refers to the maximum number of tokens the LLM can process, and the maximum attention span it has.
+
+### 7. The Importance of Prompting
+
+Since an LLM’s primary function is to predict the next token by analyzing all input tokens and determining which are most relevant, the way you phrase your input matters significantly.
+
+The input you give to an LLM is known as a **prompt**. Thoughtful prompt design helps steer the model’s output toward your intended result, making it a crucial aspect of working effectively with LLMs.
+
+### 8. How Are LLMs Trained?
+
+LLMs are initially trained on massive text corpora using a self-supervised learning approach, where the model learns to predict the next token in a sequence (autoregressive objective) or fill in masked tokens (masked language modeling). This process enables the model to capture the statistical structure, grammar, and semantics of language without explicit labels.
+
+Through this pre-training, LLMs develop a broad understanding of language patterns and can generalize to new, unseen text. 
+
+After pre-training, LLMs are often fine-tuned with supervised learning on more specific datasets to specialize in particular tasks. Fine-tuning can adapt a model for dialogue, tool use, classification, code generation, or other applications by providing labeled examples relevant to the desired task.
+
+### 9. How Are LLMs Used in AI Agents?
+
+LLMs serve as the core intelligence within AI Agents, enabling them to comprehend and generate human language.
+
+They allow agents to interpret user instructions, track conversational context, formulate plans, and select appropriate tools or actions.
+
+Throughout this unit, we will examine these capabilities in greater detail. For now, it is important to recognize that the LLM functions as the "brain" of the Agent, driving its ability to understand and respond effectively.
